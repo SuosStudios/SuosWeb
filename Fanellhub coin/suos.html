@@ -1,0 +1,668 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ca0f014a-b269-4bc7-8ef8-046cf4450f31/deploy-status)](https://app.netlify.com/projects/suosstudios/deploys)
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suos Studios | Narrativa Cinematográfica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary: #7e22ce;
+            --primary-dark: #581c87;
+            --primary-light: #a855f7;
+            --accent: #e879f9;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f0f0f;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .font-heading {
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        
+        /* Hero Animation */
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(126,34,206,0.2) 0%, rgba(15,15,15,1) 70%);
+            z-index: 1;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+            filter: brightness(0.4);
+            animation: pan 30s infinite linear;
+        }
+        
+        @keyframes pan {
+            0% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.1) translateY(-5%); }
+            100% { transform: scale(1) translateY(0); }
+        }
+        
+        /* Logo Animation */
+        .logo {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .logo-text {
+            font-size: 8rem;
+            color: var(--primary);
+            text-shadow: 0 0 15px var(--accent);
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Film Reel Effect */
+        .film-reel {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%237e22ce" stroke-width="5"/><circle cx="50" cy="50" r="30" fill="none" stroke="%237e22ce" stroke-width="5"/><circle cx="50" cy="50" r="10" fill="%237e22ce"/><rect x="45" y="10" width="10" height="10" fill="%237e22ce"/><rect x="45" y="80" width="10" height="10" fill="%237e22ce"/><rect x="10" y="45" width="10" height="10" fill="%237e22ce"/><rect x="80" y="45" width="10" height="10" fill="%237e22ce"/></svg>');
+            opacity: 0.2;
+            animation: spin 10s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Project Cards */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(168, 85, 247, 0.3);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(126,34,206,0.8), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Studio Lights */
+        .studio-light {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, rgba(168,85,247,0) 70%);
+            border-radius: 50%;
+            filter: blur(20px);
+            animation: lightPulse 4s infinite alternate;
+        }
+        
+        @keyframes lightPulse {
+            0% { transform: scale(0.8); opacity: 0.3; }
+            100% { transform: scale(1.2); opacity: 0.6; }
+        }
+        
+        /* Contact Form */
+        .contact-input {
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(168,85,247,0.3);
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 15px;
+        }
+        
+        .scroll-indicator::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scrollDown 2s infinite;
+        }
+        
+        @keyframes scrollDown {
+            0% { transform: translate(-50%, 0); opacity: 0; }
+            50% { transform: translate(-50%, 15px); opacity: 1; }
+            100% { transform: translate(-50%, 30px); opacity: 0; }
+        }
+        
+        /* Section Divider */
+        .section-divider {
+            position: relative;
+            height: 100px;
+            overflow: hidden;
+        }
+        
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+            transform: skewY(-2deg);
+        }
+        
+        /* Parallax Effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Clapperboard Icon */
+        .clapperboard {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            background: white;
+            transform: rotate(-10deg);
+        }
+        
+        .clapperboard::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 30px;
+            height: 10px;
+            background: var(--primary);
+            transform: rotate(10deg);
+            transform-origin: bottom left;
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 5rem;
+            }
+            
+            .hero-bg {
+                animation: none;
+            }
+            
+            .parallax {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Studio Lights Background Elements -->
+    <div class="studio-light top-0 left-0"></div>
+    <div class="studio-light top-0 right-0"></div>
+    <div class="studio-light bottom-0 left-0"></div>
+    <div class="studio-light bottom-0 right-0"></div>
+    
+    <!-- Film Reels -->
+    <div class="film-reel top-20 left-10"></div>
+    <div class="film-reel bottom-20 right-10"></div>
+    <div class="film-reel top-1/3 right-20"></div>
+    <div class="film-reel bottom-1/3 left-20"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black bg-opacity-80 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="font-heading text-2xl text-white">SUOS STUDIOS</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-purple-400 transition">Inicio</a>
+                <a href="#about" class="nav-link text-white hover:text-purple-400 transition">Nosotros</a>
+                <a href="#projects" class="nav-link text-white hover:text-purple-400 transition">Proyectos</a>
+                <a href="#behind-scenes" class="nav-link text-white hover:text-purple-400 transition">Detrás de Cámaras</a>
+                <a href="#contact" class="nav-link text-white hover:text-purple-400 transition">Contacto</a>
+            </div>
+            <button class="md:hidden text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero min-h-screen flex items-center justify-center relative">
+        <div class="hero-bg"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="logo mb-8">
+                <h1 class="font-heading text-6xl md:text-8xl text-white mb-4">SUOS STUDIOS</h1>
+            </div>
+            <p class="text-xl md:text-2xl text-purple-200 max-w-3xl mx-auto mb-10">
+                Donde la narrativa visionaria se encuentra con la producción de vanguardia. Creando experiencias cinematográficas que cautivan e inspiran.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="#projects" class="px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-bold transition transform hover:scale-105">
+                    Nuestro Trabajo
+                </a>
+                <a href="#contact" class="px-8 py-3 border-2 border-purple-600 hover:bg-purple-900 hover:bg-opacity-30 text-white rounded-full font-bold transition transform hover:scale-105">
+                    Contáctanos
+                </a>
+            </div>
+            <div class="scroll-indicator"></div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 relative overflow-hidden">
+        <div class="section-divider"></div>
+        <div class="container mx-auto px-6 py-20">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <h2 class="font-heading text-5xl text-white mb-6">
+                        <span class="text-purple-500">Nuestra</span> Historia
+                    </h2>
+                    <p class="text-gray-300 mb-6">
+                        Fundado en 2025, Suos Studios surgió de una pasión compartida por expandir los límites creativos en el cine y los medios digitales. Lo que comenzó como un pequeño colectivo de cineastas se ha convertido en una casa de producción galardonada.
+                    </p>
+                    <p class="text-gray-300 mb-6">
+                        Nuestro nombre "Suos" proviene de la palabra latina que significa "suyos" o "propios", y representa que cada historia que contamos en SUOS Studios le pertenece a alguien. Cada película, cada serie, tiene alma, identidad y un dueño: su creador, su audiencia, su mundo.
+                    </p>
+                    <div class="flex items-center space-x-4">
+                        <div class="clapperboard"></div>
+                        <span class="text-purple-400 font-bold">3+ Proyectos Terminados</span>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Film Production" class="rounded-lg shadow-2xl transform hover:scale-105 transition duration-500">
+                        <div class="absolute -bottom-5 -right-5 bg-purple-600 w-20 h-20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-play text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-black bg-opacity-50 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="font-heading text-5xl text-white mb-4">
+                    <span class="text-purple-500">Proyectos</span> Destacados
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Explora nuestro portafolio de obras maestras cinematográficas que han cautivado audiencias en todo el mundo.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card rounded-lg overflow-hidden">
+                    <img src="pexels-pixabay-356079.jpg" alt="Project 1" class="w-full h-64 object-cover">
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-2xl font-bold text-white mb-2">?</h3>
+                        <p class="text-purple-200 mb-4">Miniserie • 2025</p>
+                        <div class="flex space-x-2">
+                            <span class="px-3 py-1 bg-purple-900 bg-opacity-50 text-purple-200 rounded-full text-sm">Asesinato</span>
+                            <span class="px-3 py-1 bg-purple-900 bg-opacity-50 text-purple-200 rounded-full text-sm">Misterio</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card rounded-lg overflow-hidden">
+                    <img src="pexels-mikeralphcreative-1690800.jpg" alt="Project 2" class="w-full h-64 object-cover">
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-2xl font-bold text-white mb-2">Casa Tomada</h3>
+                        <p class="text-purple-200 mb-4">Cortometraje • 2024</p>
+                        <div class="flex space-x-2">
+                            <span class="px-3 py-1 bg-purple-900 bg-opacity-50 text-purple-200 rounded-full text-sm">Terror</span>
+                            <span class="px-3 py-1 bg-purple-900 bg-opacity-50 text-purple-200 rounded-full text-sm">Misterio</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card rounded-lg overflow-hidden">
+                    <img src="7 may 2025, 06_26_21 p.m..png" alt="Project 3" class="w-full h-64 object-cover">
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-2xl font-bold text-white mb-2">Casa de empanadas</h3>
+                        <p class="text-purple-200 mb-4">Comercial • 2022</p>
+                        <div class="flex space-x-2">
+                            <span class="px-3 py-1 bg-purple-900 bg-opacity-50 text-purple-200 rounded-full text-sm">Comercial</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <a href="#" class="inline-block px-8 py-3 border-2 border-purple-600 text-white rounded-full font-bold hover:bg-purple-900 hover:bg-opacity-30 transition">
+                    • • •
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Behind the Scenes Section -->
+    <section id="behind-scenes" class="parallax py-32" style="background-image: url('https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');">
+        <div class="bg-black bg-opacity-70 absolute inset-0"></div>
+        <div class="container mx-auto px-6 relative">
+            <div class="text-center mb-20">
+                <h2 class="font-heading text-5xl text-white mb-4">
+                    <span class="text-purple-500">Detrás</span> de Cámaras
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Un vistazo a nuestro proceso creativo y la magia de la producción.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg backdrop-blur-sm hover:bg-opacity-70 transition">
+                    <div class="text-purple-500 text-4xl mb-6">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Desarrollo de Concepto</h3>
+                    <p class="text-gray-300">
+                        Nuestro equipo creativo trabaja incansablemente para desarrollar conceptos únicos que expandan los límites y desafíen las convenciones.
+                    </p>
+                </div>
+                
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg backdrop-blur-sm hover:bg-opacity-70 transition">
+                    <div class="text-purple-500 text-4xl mb-6">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Excelencia en Producción</h3>
+                    <p class="text-gray-300">
+                        Equipo de última generación y técnicas líderes en la industria garantizan la más alta calidad de producción.
+                    </p>
+                </div>
+                
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg backdrop-blur-sm hover:bg-opacity-70 transition">
+                    <div class="text-purple-500 text-4xl mb-6">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Post-Producción</h3>
+                    <p class="text-gray-300">
+                        Nuestros equipos de edición y efectos visuales dan vida a las historias con transiciones fluidas y efectos impresionantes.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-purple-900 bg-opacity-20 p-6 rounded-lg text-center hover:bg-opacity-40 transition">
+                    <div class="text-purple-400 text-3xl mb-2">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="font-heading text-4xl text-white">2</div>
+                    <div class="text-purple-300">Premios</div>
+                </div>
+                
+                <div class="bg-purple-900 bg-opacity-20 p-6 rounded-lg text-center hover:bg-opacity-40 transition">
+                    <div class="text-purple-400 text-3xl mb-2">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <div class="font-heading text-4xl text-white">3</div>
+                    <div class="text-purple-300">producciones</div>
+                </div>
+                
+                <div class="bg-purple-900 bg-opacity-20 p-6 rounded-lg text-center hover:bg-opacity-40 transition">
+                    <div class="text-purple-400 text-3xl mb-2">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <div class="font-heading text-4xl text-white">1</div>
+                    <div class="text-purple-300">Comercial</div>
+                </div>
+                
+                <div class="bg-purple-900 bg-opacity-20 p-6 rounded-lg text-center hover:bg-opacity-40 transition">
+                    <div class="text-purple-400 text-3xl mb-2">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="font-heading text-4xl text-white">6+</div>
+                    <div class="text-purple-300">Profesionales Creativos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="font-heading text-5xl text-white mb-4">
+                    <span class="text-purple-500">Contácta</span>nos
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    ¿Listo para dar vida a tu visión? Contáctanos para discutir tu próximo proyecto.
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <div class="bg-black bg-opacity-50 p-8 rounded-lg backdrop-blur-sm">
+                        <h3 class="text-2xl font-bold text-white mb-6">Información de Contacto</h3>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="text-purple-500 mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">Ubicación</h4>
+                                <p class="text-gray-300">Av. Olazábal 1440</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="text-purple-500 mr-4 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">Correo Electrónico</h4>
+                                <p class="text-gray-300">suosstudios@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="text-purple-500 mr-4 mt-1">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">Teléfono</h4>
+                                <p class="text-gray-300">+54 9 11 5158-5677</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-white font-bold mb-4">Síguenos</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-purple-900 bg-opacity-50 flex items-center justify-center text-white hover:bg-purple-700 transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <form class="bg-black bg-opacity-50 p-8 rounded-lg backdrop-blur-sm">
+                        <div class="mb-6">
+                            <label for="name" class="block text-white mb-2">Tu Nombre</label>
+                            <input type="text" id="name" class="contact-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block text-white mb-2">Correo Electrónico</label>
+                            <input type="email" id="email" class="contact-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="project" class="block text-white mb-2">Tipo de Proyecto</label>
+                            <select id="project" class="contact-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                <option value="">Selecciona un tipo de proyecto</option>
+                                <option value="feature">Largometraje</option>
+                                <option value="tv">Serie de TV</option>
+                                <option value="commercial">Comercial</option>
+                                <option value="documentary">Documental</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-white mb-2">Tu Mensaje</label>
+                            <textarea id="message" rows="5" class="contact-input w-full px-4 py-3 rounded-lg focus:outline-none"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition transform hover:scale-105">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-80 py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <span class="font-heading text-2xl text-white">SUOS STUDIOS</span>
+                </div>
+                
+                <div class="text-gray-400 text-sm">
+                    &copy; 2025 Suos Studios. Todos los derechos reservados.
+                </div>
+                
+                
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script>
+        // Simple parallax effect
+        document.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const parallaxElements = document.querySelectorAll('.parallax');
+            
+            parallaxElements.forEach(element => {
+                element.style.backgroundPositionY = -scrollPosition * 0.5 + 'px';
+            });
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add animation when elements come into view
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.project-card, .studio-light, .film-reel').forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Add custom animation class
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .animate-fadeIn {
+                animation: fadeIn 1s ease forwards;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
